@@ -1,8 +1,8 @@
 <div align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/casomer-cms/website/docs/casomer.svg">
-        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/casomer-cms/website/docs/casomer-light.svg">
-        <img alt="JotSON" height="64" src="https://raw.githubusercontent.com/casomer-cms/website/docs/casomer-w-bg.svg">
+        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/casomer-cms/website/main/docs/casomer-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/casomer-cms/website/main/docs/casomer-light.svg">
+        <img alt="casomer" height="96" src="https://raw.githubusercontent.com/casomer-cms/website/main/docs/casomer-w-bg.svg">
     </picture>
     <div><a href="https://www.npmjs.com/package/casomer"><img alt="npm" src="https://img.shields.io/npm/v/casomer?label=npm&color=E8A13D"></a></div>
     <h2>The JSON-native CMS. Visual editing in, static sites out.</h2>
@@ -11,6 +11,8 @@
 </div>
 
 Your whole site - content, components, structure - lives as JSON. Publish compiles it to pre-rendered static HTML with view transitions that make static feel alive. Git-friendly. Self-host it, or let casomer cloud handle the nitty gritty.
+
+> ⚠️ **Casomer is in early active development.** Watch this repo or check [casomer.com](https://casomer.com) for the first real release.
 
 ## Install
 
@@ -22,4 +24,8 @@ cd my-project
 caso
 ```
 
-Casomer is in active early development.
+The `caso` command currently prints a friendly note. Soon it will build websites.
+
+---
+
+© Casomer. All rights reserved.
