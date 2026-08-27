@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casomer — the JSON-native CMS</title>
+<title>Casomer - the JSON-native CMS</title>
 <meta name="theme-color" content="#E8A13D" />
 <meta name="description" content="Casomer is a JSON-native CMS that compiles to lightning-fast static sites with dynamic view transitions. Powered by Alpine.js. In development.">
-<meta property="og:title" content="Casomer — the JSON-native CMS">
+<meta property="og:title" content="Casomer - the JSON-native CMS">
 <meta property="og:description" content="Visual editing in. Static sites out. View transitions that make static feel alive.">
 <meta property="og:url" content="https://casomer.com">
 <meta property="og:type" content="website">
@@ -113,6 +113,85 @@
     color: var(--paper-dim);
   }
 
+  #signup { margin-top: 2.6rem; width: min(100%, 400px); }
+  .signup-label {
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-bottom: .7rem;
+  }
+  .signup-row {
+    display: flex;
+    gap: .5rem;
+    background: var(--ink-raise);
+    border: 1px solid #2e3345;
+    border-radius: 10px;
+    padding: .35rem;
+    transition: border-color .2s;
+  }
+  .signup-row:focus-within { border-color: var(--amber); }
+  #email {
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--paper);
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: .92rem;
+    padding: .55rem .7rem;
+  }
+  #email::placeholder { color: #6b6f80; }
+  #notify {
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--amber);
+    border: none;
+    border-radius: 7px;
+    padding: .55rem 1rem;
+    cursor: pointer;
+    transition: filter .2s;
+    white-space: nowrap;
+  }
+  #notify:hover { filter: brightness(1.08); }
+  #notify:disabled { opacity: .6; cursor: default; }
+  .signup-note {
+    margin-top: .65rem;
+    font-size: .76rem;
+    color: #7d8191;
+  }
+  .signup-note.ok { color: var(--amber); }
+  .signup-note.err { color: #e07a6a; }
+
+  .confirmed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    background: var(--ink-raise);
+    border: 1px solid var(--amber);
+    border-radius: 10px;
+    padding: .95rem 1.2rem;
+  }
+  .confirmed .check {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: var(--ink);
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .confirmed p { font-size: .92rem; color: var(--paper); }
+  .confirmed p span { color: var(--paper-dim); }
+
   footer {
     padding: 2rem 1.5rem 2.4rem;
     text-align: center;
@@ -149,6 +228,15 @@
     <span id="cmd">npm install -g casomer</span>
     <button id="copy" type="button" aria-label="Copy install command">copy</button>
   </div>
+  <form id="signup" action="https://app.kit.com/forms/9850506/subscriptions" method="post" novalidate>
+    <p class="signup-label">Get notified at launch</p>
+    <div class="signup-row">
+      <input type="email" name="email_address" id="email" placeholder="you@example.com"
+             autocomplete="email" required aria-label="Email address">
+      <button type="submit" id="notify">notify me</button>
+    </div>
+    <p class="signup-note" id="signup-note">No spam. One email when it ships, a few along the way.</p>
+  </form>
   <nav class="links">
     <a href="https://github.com/casomer-cms/casomer">GitHub</a>
     <a href="https://www.npmjs.com/package/casomer">npm</a>
@@ -169,6 +257,46 @@
       btn.textContent = "select it";
     }
   });
+
+  const form = document.getElementById("signup");
+  const note = document.getElementById("signup-note");
+  const notify = document.getElementById("notify");
+
+  if (new URLSearchParams(location.search).get("confirmed") === "1") {
+    form.innerHTML =
+      '<p class="signup-label">Get notified at launch</p>' +
+      '<div class="confirmed"><span class="check">&#10003;</span>' +
+      "<p>You're confirmed. <span>See you at launch!</span></p></div>";
+    history.replaceState(null, "", location.pathname);
+  } else {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        note.textContent = "That email doesn't look right.";
+        note.className = "signup-note err";
+        return;
+      }
+      notify.disabled = true;
+      notify.textContent = "\u2026";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new URLSearchParams({ email_address: email })
+        });
+        if (!res.ok) throw new Error(res.status);
+        form.querySelector(".signup-row").style.display = "none";
+        note.textContent = "You're on the list - check your inbox to confirm.";
+        note.className = "signup-note ok";
+      } catch (err) {
+        note.textContent = "Something went wrong - try again, or email hello@casomer.com.";
+        note.className = "signup-note err";
+        notify.disabled = false;
+        notify.textContent = "notify me";
+      }
+    });
+  }
 </script>
 </body>
 </html>
