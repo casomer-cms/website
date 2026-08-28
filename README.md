@@ -28,4 +28,4 @@ The `caso` command currently prints a friendly note. Soon it will build websites
 
 ---
 
-© Casomer. All rights reserved.
+© Casomer™. All rights reserved.
