@@ -77,11 +77,15 @@
   .steps li .title { color: var(--paper); font-weight: 400; }
 
   .wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .7rem; }
-  .wall .person { display: flex; align-items: center; gap: .7rem; background: var(--ink-raise); border: 1px solid var(--line); border-radius: 10px; padding: .7rem .85rem; }
+  /* The whole card is the link to the person's GitHub (Mikey, 2026-09-05):
+     it lifts with a dark shadow on hover and the handle turns amber. */
+  .wall .person { display: flex; align-items: center; gap: .7rem; background: var(--ink-raise); border: 1px solid var(--line); border-radius: 10px; padding: .7rem .85rem; color: inherit; text-decoration: none; padding-bottom: .7rem; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .wall a.person { border-bottom: 1px solid var(--line); }
+  .wall .person:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(0, 0, 0, .45); border-color: #3a3f52; color: inherit; }
   .wall .avatar { width: 34px; height: 34px; border-radius: 50%; background: #2e3345; object-fit: cover; flex: none; display: grid; place-items: center; color: var(--heart); }
   .wall .name { color: var(--paper); font-size: .95rem; font-weight: 400; line-height: 1.3; }
-  .wall .handle { font-size: .78rem; color: var(--paper-dim); border: 0; }
-  .wall .handle:hover { color: var(--amber); }
+  .wall .handle { font-size: .78rem; color: var(--paper-dim); transition: color .2s; }
+  .wall .person:hover .handle { color: var(--amber); }
   .wall-empty { grid-column: 1 / -1; color: #7d8191; font-size: .92rem; }
   .heart { color: var(--heart); }
 
@@ -99,6 +103,20 @@
   .tiers button[aria-pressed="true"] { background: var(--ink-raise); color: var(--paper); box-shadow: inset 0 0 0 1px var(--amber); }
   .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1rem; }
   .row .label { font-size: .85rem; color: var(--paper-dim); }
+  /* Two columns on a wide screen: the text on the left, the form card
+     sticky at the top right (a little narrower than the text so a
+     normal desktop fits both); one column in reading order below. */
+  .layout > * + * { margin-top: 0; }
+  .side h2 + .card { margin-top: .9rem; }
+  @media (min-width: 1024px) {
+    main.wide { width: min(100%, 1080px); }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; column-gap: 3.5rem; align-items: start; }
+    .layout .intro, .layout .rest { grid-column: 1; }
+    .layout .side { grid-column: 2; grid-row: 1 / span 2; align-self: stretch; }
+    .layout .side .sticky { position: sticky; top: 1.5rem; }
+    .layout .side h2 { margin-top: .6rem; }
+    .layout .rest > h2:first-child { margin-top: 3rem; }
+  }
   footer { padding: 1.5rem; text-align: center; font-size: .76rem; color: #7d8191; }
   footer a { color: inherit; border: 0; }
 </style>
@@ -116,7 +134,10 @@
   <p id="thanks-note">This usually takes a few seconds. If the email has not arrived in ten minutes, check spam, then write to <a href="mailto:support@casomer.com">support@casomer.com</a> from the address you paid with.</p>
 </div>
 <h2>Next</h2>
-<p>Open Studio, then: <br><br>For a <strong>supporter key</strong>: open your avatar menu → click "Become a supporter" → click "I already have a key". <br><br>For a <strong>license</strong>: open your avatar menu → select "License". On the command line: <code>caso license &lt;key&gt;</code>.</p>
+<p>Open Studio, then click your <strong>user icon</strong> at the top right to open your menu.</p>
+<p>For a <strong>supporter key</strong>: choose <strong>Become a supporter</strong>, then <strong>I already have a key</strong>. Paste the key and press Verify.</p>
+<p>For a <strong>license</strong>: choose <strong>License</strong>. It opens the License card in Settings; paste the key and press Save key. Or, on the command line in the site's folder:</p>
+<p><code>caso license CSMR.…</code></p>
 </main>
 <footer>
   <p>&copy; 2026 Casomer&trade;</p>
@@ -156,6 +177,20 @@
       status.textContent = error.message;
       button.disabled = false;
       button.textContent = label;
+    }
+  }
+
+  // Studio and caso link here as /license?site=<host>: the domain
+  // arrives filled in, so the key is bound to the address the site
+  // declares rather than one typed from memory.
+  {
+    const site = new URLSearchParams( window.location.search ).get( 'site' );
+    const input = document.getElementById( 'site-host' );
+
+    if ( site && input )
+    {
+      input.value = site.trim();
+      document.querySelector( '[data-status="license-status"]' )?.focus();
     }
   }
 </script>

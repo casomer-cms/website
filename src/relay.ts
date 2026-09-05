@@ -20,6 +20,7 @@ const routes: readonly { readonly pattern: RegExp; readonly methods: readonly st
     { pattern: /^\/api\/checkout$/, methods: [ 'POST' ], target: () => '/v1/checkout', cors: true },
     { pattern: /^\/api\/checkout\/([^/]+)$/, methods: [ 'GET' ], target: ( match ) => `/v1/checkout/${match[ 1 ]}`, cors: true },
     { pattern: /^\/api\/licenses\/activate$/, methods: [ 'POST' ], target: () => '/v1/licenses/activate' },
+    { pattern: /^\/api\/billing\/portal$/, methods: [ 'POST' ], target: () => '/v1/billing/portal' },
     { pattern: /^\/api\/supporters\/wall$/, methods: [ 'GET', 'POST', 'DELETE' ], target: () => '/v1/supporters/wall', cors: true },
     { pattern: /^\/api\/supporters\/([^/]+)\/avatar$/, methods: [ 'GET' ], target: ( match ) => `/v1/supporters/${match[ 1 ]}/avatar`, cors: true },
 ];
@@ -88,8 +89,14 @@ export default {
             // The cloud unreachable (a thrown fetch, or Cloudflare's own
             // 52x/53x for a dead origin) is one clean answer, not a raw
             // edge error page: the pages show their fallback line and caso
-            // treats it as no news.
-            if ( upstream.status >= 500 )
+            // treats it as no news. The cloud's OWN 502 is different: a
+            // JSON answer saying Stripe refused, with Stripe's reason, and
+            // the page shows that reason rather than a false "unreachable"
+            // (2026-09-05: a live checkout failed behind the generic line).
+            const upstreamType = upstream.headers.get( 'content-type' ) ?? '';
+            const cloudRefusal = upstream.status === 502 && upstreamType.includes( 'application/json' );
+
+            if ( upstream.status >= 500 && !cloudRefusal )
             {
                 return Response.json( { error: 'Casomer Cloud is not reachable right now. Try again in a little while.' }, { status: 503, headers: { 'cache-control': 'no-store', ...( route.cors === true ? corsHeaders() : {} ) } } );
             }
@@ -99,7 +106,14 @@ export default {
 
             if ( type !== null ) { headers.set( 'content-type', type ); }
             if ( route.cors === true ) { for ( const [ name, value ] of Object.entries( corsHeaders() ) ) { headers.set( name, value ); } }
-            if ( url.pathname.endsWith( '/avatar' ) ) { headers.set( 'cache-control', 'public, max-age=3600' ); }
+            // An avatar is bytes to draw, never a document: the policy
+            // keeps an image from running anything if opened directly.
+            if ( url.pathname.endsWith( '/avatar' ) )
+            {
+                headers.set( 'cache-control', 'public, max-age=3600' );
+                headers.set( 'content-security-policy', "default-src 'none'; sandbox" );
+                headers.set( 'x-content-type-options', 'nosniff' );
+            }
 
             return new Response( upstream.body, { status: upstream.status, headers } );
         }
