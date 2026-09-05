@@ -191,6 +191,20 @@
       button.textContent = label;
     }
   }
+
+  // Studio and caso link here as /license?site=<host>: the address
+  // arrives filled in, so the key is bound to the address the site
+  // declares rather than one typed from memory.
+  {
+    const site = new URLSearchParams( window.location.search ).get( 'site' );
+    const input = document.getElementById( 'site-host' );
+
+    if ( site && input )
+    {
+      input.value = site.trim();
+      document.querySelector( '[data-status="license-status"]' )?.focus();
+    }
+  }
 </script>
 
 </body>

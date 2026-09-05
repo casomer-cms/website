@@ -66,15 +66,33 @@ export default {
 
             if ( body !== undefined && body.length > BODY_LIMIT ) { return Response.json( { error: 'body too large' }, { status: 413 } ); }
 
-            const upstream = await fetch( `${env.CLOUD_ORIGIN}${route.target( match )}`, {
-                method: request.method,
-                headers: {
-                    authorization: `Bearer ${env.CLOUD_RELAY_TOKEN}`,
-                    'content-type': 'application/json',
-                    'x-forwarded-for': request.headers.get( 'cf-connecting-ip' ) ?? '',
-                },
-                ...( body === undefined ? {} : { body } ),
-            } );
+            let upstream: Response;
+
+            try
+            {
+                upstream = await fetch( `${env.CLOUD_ORIGIN}${route.target( match )}`, {
+                    method: request.method,
+                    headers: {
+                        authorization: `Bearer ${env.CLOUD_RELAY_TOKEN}`,
+                        'content-type': 'application/json',
+                        'x-forwarded-for': request.headers.get( 'cf-connecting-ip' ) ?? '',
+                    },
+                    ...( body === undefined ? {} : { body } ),
+                } );
+            }
+            catch
+            {
+                upstream = new Response( null, { status: 530 } );
+            }
+
+            // The cloud unreachable (a thrown fetch, or Cloudflare's own
+            // 52x/53x for a dead origin) is one clean answer, not a raw
+            // edge error page: the pages show their fallback line and caso
+            // treats it as no news.
+            if ( upstream.status >= 500 )
+            {
+                return Response.json( { error: 'Casomer Cloud is not reachable right now. Try again in a little while.' }, { status: 503, headers: { 'cache-control': 'no-store', ...( route.cors === true ? corsHeaders() : {} ) } } );
+            }
 
             const headers = new Headers( { 'cache-control': 'no-store' } );
             const type = upstream.headers.get( 'content-type' );
