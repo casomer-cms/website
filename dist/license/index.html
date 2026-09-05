@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>License - Casomer</title>
+<meta name="theme-color" content="#E8A13D" />
+<meta name="description" content="Personal sites are free forever. A commercial site takes one license per site, perpetual, bound to its address.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="License - Casomer">
+<meta property="og:description" content="Personal sites are free forever. A commercial site takes one license per site, perpetual, bound to its address.">
+<meta property="og:url" content="https://casomer.com/license">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201068%201068%22%20role%3D%22img%22%20aria-label%3D%22Casomer%20mark%22%3E%3Crect%20width%3D%221068%22%20height%3D%221068%22%20rx%3D%22234%22%20fill%3D%22%231A1D28%22/%3E%3Cg%20transform%3D%22translate%280%2C1068%29%20scale%281%2C-1%29%22%3E%3Cg%20transform%3D%22translate%28-1588.5%2C262.5%29%22%3E%3Cpath%20d%3D%22M%201998.8%2086.0%20A%20223.0%20223.0%200%200%201%202310.1%20392.0%22%20fill%3D%22none%22%20stroke%3D%22%23F7F5F0%22%20stroke-width%3D%22140%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M%202148.5%20493.0%20A%20223.0%20223.0%200%200%201%201900.8%20295.9%22%20fill%3D%22none%22%20stroke%3D%22%23E8A13D%22%20stroke-width%3D%22140%22%20stroke-linecap%3D%22round%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1D28;
+    --ink-raise: #232735;
+    --paper: #F7F5F0;
+    --paper-dim: #A9ACB8;
+    --amber: #E8A13D;
+    --heart: #F06A9B;
+    --line: #2e3345;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { color-scheme: dark; scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "Sora", system-ui, sans-serif;
+    font-weight: 300;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.7;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: var(--paper); text-decoration: none; border-bottom: 1px solid #3a3f52; padding-bottom: 1px; transition: border-color .2s, color .2s; }
+  a:hover { color: var(--amber); border-color: var(--amber); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem clamp(1.25rem, 4vw, 2.5rem); }
+  header.top a.home { border: 0; display: inline-flex; }
+  header.top img { height: 34px; width: auto; }
+  header.top .crumb { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
+
+  main { flex: 1; width: min(100%, 720px); margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+  h1 { font-size: clamp(1.7rem, 4.2vw, 2.4rem); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; }
+  .lede { margin-top: 1rem; font-size: clamp(1.02rem, 2vw, 1.15rem); color: var(--paper-dim); max-width: 56ch; }
+  .lede strong, p strong { color: var(--paper); font-weight: 400; }
+  h2 { margin-top: 3rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); font-weight: 600; }
+  h2 + p, h2 + ul, h2 + ol, h2 + .card, h2 + .wall { margin-top: .9rem; }
+  p + p, ul + p, p + ul, ol + p { margin-top: .9rem; }
+  p, li { color: var(--paper-dim); font-size: .98rem; }
+  ul, ol { padding-left: 1.2rem; }
+  li + li { margin-top: .35rem; }
+  li::marker { color: var(--amber); }
+  code { font-family: var(--mono); font-size: .88em; background: var(--ink-raise); border: 1px solid var(--line); border-radius: 5px; padding: .1em .4em; color: var(--paper); }
+
+  .card { background: var(--ink-raise); border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem 1.35rem; }
+  .card p { color: var(--paper-dim); }
+  .card .title { color: var(--paper); font-weight: 400; font-size: 1.02rem; }
+  .actions { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
+  .button { display: inline-flex; align-items: center; gap: .5rem; font-family: "Sora", system-ui, sans-serif; font-size: .9rem; font-weight: 600; color: var(--ink); background: var(--amber); border: 0; border-radius: 8px; padding: .65rem 1.05rem; cursor: pointer; transition: filter .2s; }
+  .button:hover { filter: brightness(1.08); color: var(--ink); }
+  .button.quiet { background: none; color: var(--paper); border: 1px solid #3a3f52; font-weight: 400; }
+  .button.quiet:hover { color: var(--amber); border-color: var(--amber); }
+  .note { font-size: .8rem; color: #7d8191; }
+
+  .steps { counter-reset: step; list-style: none; padding: 0; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 2rem 1fr; gap: .6rem; margin-top: .9rem; }
+  .steps li::before { content: counter(step); color: var(--amber); font-weight: 600; font-size: .9rem; padding-top: .1rem; }
+  .steps li .title { color: var(--paper); font-weight: 400; }
+
+  .wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .7rem; }
+  .wall .person { display: flex; align-items: center; gap: .7rem; background: var(--ink-raise); border: 1px solid var(--line); border-radius: 10px; padding: .7rem .85rem; }
+  .wall .avatar { width: 34px; height: 34px; border-radius: 50%; background: #2e3345; object-fit: cover; flex: none; display: grid; place-items: center; color: var(--heart); }
+  .wall .name { color: var(--paper); font-size: .95rem; font-weight: 400; line-height: 1.3; }
+  .wall .handle { font-size: .78rem; color: var(--paper-dim); border: 0; }
+  .wall .handle:hover { color: var(--amber); }
+  .wall-empty { grid-column: 1 / -1; color: #7d8191; font-size: .92rem; }
+  .heart { color: var(--heart); }
+
+  .field { display: flex; gap: .5rem; background: var(--ink); border: 1px solid #3a3f52; border-radius: 9px; padding: .3rem; margin-top: .9rem; }
+  .field:focus-within { border-color: var(--amber); }
+  .field input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--paper); font-family: "Sora", system-ui, sans-serif; font-size: .92rem; padding: .5rem .6rem; }
+  .field input::placeholder { color: #6b6f80; }
+  .button:disabled { opacity: .6; cursor: default; }
+  .status { margin-top: .7rem; font-size: .8rem; color: #7d8191; min-height: 1.2em; }
+  .status.err { color: #e07a6a; }
+  .status.ok { color: var(--amber); }
+  .tiers { display: inline-flex; gap: .35rem; background: var(--ink); border: 1px solid #3a3f52; border-radius: 9px; padding: .3rem; }
+  .tiers button { font-family: "Sora", system-ui, sans-serif; font-size: .88rem; font-weight: 400; color: var(--paper-dim); background: none; border: 0; border-radius: 6px; padding: .45rem .8rem; cursor: pointer; transition: color .2s, background .2s; }
+  .tiers button:hover { color: var(--paper); }
+  .tiers button[aria-pressed="true"] { background: var(--ink-raise); color: var(--paper); box-shadow: inset 0 0 0 1px var(--amber); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1rem; }
+  .row .label { font-size: .85rem; color: var(--paper-dim); }
+  footer { padding: 1.5rem; text-align: center; font-size: .76rem; color: #7d8191; }
+  footer a { color: inherit; border: 0; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="/" aria-label="Casomer home"><img src="/assets/casomer-dark.svg" alt="casomer"></a>
+  <span class="crumb">License</span>
+</header>
+<main>
+<h1>Licensing Casomer</h1>
+<p class="lede"><strong>Personal sites are free, forever.</strong> A site that makes or seeks money takes one license per site: perpetual for publishing, bound to the site's address, and never a runtime dependency. Building, previewing, and editing are never gated for anyone.</p>
+
+<h2>Which is mine?</h2>
+<p><strong>Personal</strong> is an individual's hobby project, blog, or experiment with no commercial angle. Your own portfolio counts as personal even when it advertises your own paid services, as long as it is yours and not run for an organization.</p>
+<p><strong>Commercial</strong> is money through or around the site: paid client work (freelance and agencies included), selling or advertising products or services, paid ads, or soliciting paid work on an organization's behalf. An agency licenses its own site and each client site: every site is its own address, its own declaration, its own license.</p>
+<p class="note">A site is a production address. Apex and <code>www</code> count as one. Localhost, staging, and preview addresses never need a license.</p>
+
+<h2>How it works</h2>
+<ol class="steps">
+  <li><div><span class="title">Declare the site.</span><br>At <code>caso init</code>, or later under Site settings in Studio. Casomer never guesses; you say which it is.</div></li>
+  <li><div><span class="title">Publish. The evaluation starts.</span><br>A commercial site's first publish opens a <strong>14-day evaluation</strong>. Publishing works normally the whole time; Studio shows how many days are left.</div></li>
+  <li><div><span class="title">License it.</span><br>Get a key for the site's address (below). Paste it in Studio under Settings, License, or run <code>caso license &lt;key&gt;</code>. From then on publishing never asks again, offline included.</div></li>
+</ol>
+
+<h2>Get a license</h2>
+<div class="card">
+  <p class="title">99 dollars, once, per site, plus tax where it applies. Yours for good.</p>
+  <p>No renewal, no seat count, no expiry: one payment licenses one site's publishing forever. Enter the site's address exactly as Studio shows it under Site address; the key is bound to it. Checkout is handled by Stripe, and the key arrives by email the moment the payment goes through.</p>
+  <div class="field">
+    <input type="text" id="site-host" placeholder="https://your-site.com" autocomplete="url" spellcheck="false" aria-label="Site address">
+  </div>
+  <div class="actions">
+    <button type="button" class="button" data-status="license-status" onclick="startCheckout( this, 'license', document.getElementById( 'site-host' ).value )">Buy a license</button>
+    <a class="button quiet" href="/supporters">Personal site? See supporters</a>
+  </div>
+  <p class="status" id="license-status"></p>
+</div>
+
+<h2>What a license is</h2>
+<ul>
+  <li><strong>Per site.</strong> The key names the site's address and works nowhere else.</li>
+  <li><strong>Perpetual for publishing.</strong> Once granted, it is valid for that site's publishes forever. It is kept on your computer, never in the site's repository, so a public repo never leaks it.</li>
+  <li><strong>Offline.</strong> The key verifies on your computer. casomer.com is asked only when it can be, to record the activation; a server being down can never stop a licensed site from publishing.</li>
+  <li><strong>Moving a site</strong> to a new address is a new key for the new address and the old one retired. <a href="mailto:support@casomer.com?subject=License%20transfer">Ask</a> and it is done the same day.</li>
+  <li><strong>No renewals.</strong> The license is a one-time purchase. Ongoing services, when you want them, are what Casomer Cloud is for.</li>
+</ul>
+
+<h2>Entering the key</h2>
+<p>In Studio: open <strong>Settings</strong>, find the <strong>License</strong> card (it appears only on commercial sites), paste the key, and press <strong>Save key</strong>. When the evaluation has already ended, the Publish button asks for the key in place. On the command line: <code>caso license CSMR.…</code> from the site's folder.</p>
+<p class="note">A key starts with <code>CSMR.</code>. If Studio says the key belongs to a different address, the site's address in Studio and the address the key was issued for do not match; check Site settings first.</p>
+</main>
+<footer>
+  <p>&copy; 2026 Casomer&trade;</p>
+</footer>
+<script>
+  // Checkout: ask the relay for a Stripe session and go there.
+  for ( const tier of document.querySelectorAll( '#tiers button' ) )
+  {
+    tier.addEventListener( 'click', () =>
+    {
+      for ( const other of document.querySelectorAll( '#tiers button' ) ) { other.setAttribute( 'aria-pressed', String( other === tier ) ); }
+    } );
+  }
+
+  async function startCheckout ( button, product, host, tier )
+  {
+    const status = document.getElementById( button.dataset.status );
+    const label = button.textContent;
+
+    button.disabled = true;
+    button.textContent = 'One moment';
+    status.className = 'status';
+    status.textContent = '';
+
+    try
+    {
+      const response = await fetch( '/api/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify( { product, host, tier } ) } );
+      const body = await response.json().catch( () => ( {} ) );
+
+      if ( !response.ok || typeof body.url !== 'string' ) { throw new Error( body.error || 'Checkout is not open yet. Write to support@casomer.com and we will sort it by hand.' ); }
+
+      window.location.href = body.url;
+    }
+    catch ( error )
+    {
+      status.className = 'status err';
+      status.textContent = error.message;
+      button.disabled = false;
+      button.textContent = label;
+    }
+  }
+</script>
+
+</body>
+</html>

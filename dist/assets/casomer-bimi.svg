@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 512 512">
+  <title>Casomer</title>
+  <rect x="0" y="0" width="512" height="512" fill="#1A1D28"/>
+  <g transform="scale(1.88066) translate(-915 702.3) scale(1 -1)" fill="none" stroke-linecap="round" stroke-width="44.394">
+    <path stroke="#F7F5F0" d="M1012.42 507.304c27.85-18.557 64.89-15.037 88.76 8.427 23.87 23.465 28.03 60.447 9.96 88.627"/>
+    <path stroke="#E8A13D" d="M1059.88 636.392a70.8 70.8 0 0 1-52.29-14.913 70.77 70.77 0 0 1-26.265-47.606"/>
+  </g>
+</svg>

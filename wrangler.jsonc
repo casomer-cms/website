@@ -1,5 +1,16 @@
 {
   "name": "casomer-website",
   "compatibility_date": "2026-08-01",
-  "assets": { "directory": "./dist" }
+  // The static site, served by the Worker below; /api/* goes to the
+  // Worker first and relays to Casomer Cloud (src/relay.ts).
+  "main": "src/relay.ts",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "CLOUD_ORIGIN": "https://api.casomer.cloud"
+  }
+  // CLOUD_RELAY_TOKEN is a secret: wrangler secret put CLOUD_RELAY_TOKEN
 }
